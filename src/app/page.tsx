@@ -1,7 +1,10 @@
 
 
+
 export default function Home() {
   return (
-    <h1>Hello there </h1>
+    <div>
+      <h1>My Book Store</h1>
+    </div>
   );
 }
