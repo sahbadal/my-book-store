@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from './ui/button';
 
 const Navbar: React.FC = () => {
     return (
@@ -15,14 +16,14 @@ const Navbar: React.FC = () => {
         {/* Buttons */}
         <div className="flex gap-4">
           <Link href="/login">
-            <button className="px-4 py-2 border border-gray-400 text-gray-700 rounded-lg hover:bg-gray-200 transition">
+            <Button variant={'secondary'}>
               Login
-            </button>
+            </Button>
           </Link>
           <Link href="/signup">
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+            <Button variant={'outline'} >
               Sign Up
-            </button>
+            </Button>
           </Link>
         </div>
       </div>
