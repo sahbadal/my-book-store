@@ -7,7 +7,6 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
 
   let book: Book | null = null;
 
-  try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/books/${params.bookId}`
     );
@@ -17,9 +16,6 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
     }
 
     book = await response.json();
-  } catch (error: any) {
-    console.log(error.message);
-  }
 
   if (!book) {
     return (
