@@ -3,12 +3,12 @@ import { Book } from "@/types";
 import Image from "next/image";
 import Download from "./components/Download";
 
-// ✅ Correct Type Definition
+// ✅ PageProps ka sahi tarika
 interface PageProps {
   params: { bookId: string };
 }
 
-const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
+const SingleBookPage = async ({ params }: PageProps) => {
   let book: Book | null = null;
 
   try {
