@@ -7,15 +7,24 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
 
   let book: Book | null = null;
 
+  try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/books/${params.bookId}`
     );
-
+  
     if (!response.ok) {
       throw new Error("Failed to fetch book");
     }
-
+  
     book = await response.json();
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching book:", error.message);
+    } else {
+      console.error("An unknown error occurred");
+    }
+  }
+  
 
   if (!book) {
     return (
