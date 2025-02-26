@@ -1,9 +1,13 @@
 import React from "react";
-import { Book, PageParams } from "@/types";
+import { Book } from "@/types";
 import Image from "next/image";
 import Download from "./components/Download";
 
-const SingleBookPage = async ({ params }: PageParams) => {
+interface PageProps {
+  params: { bookId: string };
+}
+
+const SingleBookPage = async ({ params }: PageProps) => {
   let book: Book | null = null;
 
   try {
