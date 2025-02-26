@@ -13,4 +13,7 @@ export interface Author {
     name: string;
 }
 
+export interface PageParams {
+    params: { bookId: string };
+}
 

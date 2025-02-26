@@ -1,30 +1,24 @@
 import React from "react";
-import { Book } from "@/types";
+import { Book, PageParams } from "@/types";
 import Image from "next/image";
 import Download from "./components/Download";
 
-const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
-
+const SingleBookPage = async ({ params }: PageParams) => {
   let book: Book | null = null;
 
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/books/${params.bookId}`
     );
-  
+
     if (!response.ok) {
       throw new Error("Failed to fetch book");
     }
-  
+
     book = await response.json();
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error("Error fetching book:", error.message);
-    } else {
-      console.error("An unknown error occurred");
-    }
+    console.error("Error fetching book:", error instanceof Error ? error.message : "Unknown error");
   }
-  
 
   if (!book) {
     return (
@@ -37,7 +31,6 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
   return (
     <div className="max-w-7xl m-auto px-6 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        
         {/* Left Side: Book Details */}
         <div>
           <h1 className="text-3xl font-bold text-blue-600 dark:text-white mb-4">
@@ -46,19 +39,12 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
           <p className="text-gray-600 dark:text-gray-300 text-lg mb-6">
             {book.description}
           </p>
-
-          <Download  fileLink = {book.file} />
-
+          <Download fileLink={book.file} />
         </div>
 
         {/* Right Side: Book Cover Image */}
         <div className="relative w-full h-[450px] shadow-lg rounded-lg overflow-hidden">
-          <Image
-            src={book.coverImage}
-            alt={book.title}
-            fill
-            className="object-cover"
-          />
+          <Image src={book.coverImage} alt={book.title} fill className="object-cover" />
         </div>
       </div>
     </div>
