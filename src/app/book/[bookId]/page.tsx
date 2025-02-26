@@ -3,11 +3,12 @@ import { Book } from "@/types";
 import Image from "next/image";
 import Download from "./components/Download";
 
+// ✅ Correct Type Definition
 interface PageProps {
   params: { bookId: string };
 }
 
-const SingleBookPage = async ({ params }: PageProps) => {
+const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
   let book: Book | null = null;
 
   try {
